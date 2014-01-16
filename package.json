@@ -1,0 +1,35 @@
+{
+	"name": "gulp-bower",
+	"version": "0.0.1",
+	"description": "Install Bower packages.",
+	"main": "index.js",
+	"dependencies": {
+		"bower": "latest",
+		"gulp-util": "latest",
+		"through2": "latest",
+		"walk": "latest"
+	},
+	"devDependencies": {
+		"gulp": "latest",
+		"gulp-jshint": "latest"
+	},
+	"scripts": {
+		"test": "mocha"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/zont/gulp-bower.git"
+	},
+	"keywords": [
+		"gulpplugin",
+		"bower"
+	],
+	"author": "Alexander Zonov <zont@pochta.ru>",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/zont/gulp-bower/issues"
+	},
+	"engines": {
+		"node": ">=0.8"
+	}
+}
