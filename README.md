@@ -21,3 +21,16 @@ gulp.task('bower', function() {
     .pipe(gulp.dest('lib/'))
 });
 ```
+
+This defaults to the directory configured in `./.bowerrc` or to `./bower_components` when no `.bowerrc` could be found.
+
+You can also specify a custom Bower directory:
+
+```javascript
+var bower = require('gulp-bower');
+
+gulp.task('bower', function() {
+  bower('./my_bower_components')
+    .pipe(gulp.dest('lib/'))
+});
+```
