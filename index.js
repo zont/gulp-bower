@@ -5,8 +5,7 @@ var path = require('path');
 var through = require('through2');
 var walk = require('walk');
 
-module.exports = function (dir) {
-	var bower_dir = bower_dir;
+module.exports = function (bower_dir) {
 	
 	var stream = through.obj(function(file, enc, callback) {
 		this.push(file);
