@@ -5,7 +5,8 @@ var path = require('path');
 var through = require('through2');
 var walk = require('walk');
 
-module.exports = function () {
+module.exports = function (bower_dir) {
+	
 	var stream = through.obj(function(file, enc, callback) {
 		this.push(file);
 		callback();
@@ -17,8 +18,22 @@ module.exports = function () {
 			stream.end();
 		})
 		.on('end', function() {
-			var dir = './bower_components';
-
+			var dir;
+			if(bower_dir !== null && typeof(bower_dir) !== 'undefined' && bower_dir !== '') {
+				dir = bower_dir;
+			} else {
+				
+				if(fs.existsSync('./.bowerrc')) {
+					var bower_config = JSON.parse(fs.readFileSync('./.bowerrc'));
+					dir = bower_config.directory;
+				} 
+				if(typeof(dir) === 'undefined' || dir === null || dir === "") {
+					dir = './bower_components';
+				}
+			}
+			
+			gutil.log("Using bower dir: ", dir);
+			
 			var walker = walk.walk(dir);
 			walker.on("errors", function(root, stats, next) {
 				stream.emit('error', new gutil.PluginError('gulp-bower', stats.error));
