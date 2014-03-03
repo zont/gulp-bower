@@ -34,3 +34,14 @@ gulp.task('bower', function() {
     .pipe(gulp.dest('lib/'))
 });
 ```
+
+## Changelog
+
+#####0.0.3
+- add logging (by squarejaw)
+
+#####0.0.2
+- parse .bowerrc for the bower install directory or allow the user to specify the directory (by eboskma)
+
+#####0.0.1
+- initial release
