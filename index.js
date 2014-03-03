@@ -13,6 +13,9 @@ module.exports = function (bower_dir) {
 	});
 
 	bower.commands.install()
+		.on('log', function(result) {
+			gutil.log(['bower', gutil.colors.cyan(result.id), result.message].join(' '));
+		})
 		.on('error', function(error) {
 			stream.emit('error', new gutil.PluginError('gulp-bower', error));
 			stream.end();
