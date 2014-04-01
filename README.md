@@ -37,6 +37,9 @@ gulp.task('bower', function() {
 
 ## Changelog
 
+#####0.0.4
+- fixed custom bower directory bug
+
 #####0.0.3
 - add logging (by squarejaw)
 
