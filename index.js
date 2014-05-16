@@ -60,6 +60,7 @@ module.exports = function (bower_dir) {
 			});
 			walker.on("end", function() {
 				stream.end();
+				stream.emit("end");
 			});
 		});
 
