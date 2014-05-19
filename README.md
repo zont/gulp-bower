@@ -37,6 +37,9 @@ gulp.task('bower', function() {
 
 ## Changelog
 
+#####0.0.5
+- Emits "end", so the consumer knows when bower is done installing (by agzam)
+
 #####0.0.4
 - fixed custom bower directory bug
 

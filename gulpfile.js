@@ -11,6 +11,4 @@ gulp.task('lint', function() {
 		.pipe(jshint.reporter('default'))
 });
 
-gulp.task('default', function() {
-	gulp.run('lint');
-});
+gulp.task('default', ['lint']);
