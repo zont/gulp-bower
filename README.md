@@ -17,7 +17,7 @@ Then, add it to your `gulpfile.js`:
 var bower = require('gulp-bower');
 
 gulp.task('bower', function() {
-  bower()
+  return bower()
     .pipe(gulp.dest('lib/'))
 });
 ```
@@ -30,7 +30,18 @@ You can also specify a custom Bower directory:
 var bower = require('gulp-bower');
 
 gulp.task('bower', function() {
-  bower('./my_bower_components')
+  return bower('./my_bower_components')
+    .pipe(gulp.dest('lib/'))
+});
+```
+
+To set the current working directory, you must pass in an `options` object:
+
+```javascript
+var bower = require('gulp-bower');
+
+gulp.task('bower', function() {
+  return bower({ directory: './my_bower_components', cwd: './myapp' })
     .pipe(gulp.dest('lib/'))
 });
 ```

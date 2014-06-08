@@ -5,28 +5,35 @@ var path = require('path');
 var through = require('through2');
 var walk = require('walk');
 
-module.exports = function (bower_dir) {
-	
+module.exports = function (opts) {
+
 	var stream = through.obj(function(file, enc, callback) {
 		this.push(file);
 		callback();
 	});
 
-	var dir;
-	if (bower_dir)
-		dir = bower_dir;
-	else {
-		if (fs.existsSync('./.bowerrc')) {
-			var bower_config = JSON.parse(fs.readFileSync('./.bowerrc'));
-			dir = bower_config.directory;
-		} 
-		if (typeof(dir) === 'undefined' || dir === null || dir === '') {
-			dir = './bower_components';
-		}
+	if (typeof opts === 'string') {
+		opts = {
+			directory: opts
+		};
 	}
+
+	opts || (opts = {});
+
+	if (!opts.directory) {
+		var bowerrc = (opts.cwd || '.') + '/.bowerrc';
+		if (fs.existsSync(bowerrc)) {
+			var bower_config = JSON.parse(fs.readFileSync(bowerrc));
+			opts.directory = bower_config.directory;
+		}
+		opts.directory || (opts.directory = './bower_components');
+	}
+
+	var dir = opts.directory;
+	gutil.log("Using cwd: ", opts.cwd || process.cwd());
 	gutil.log("Using bower dir: ", dir);
 
-	bower.commands.install([], {}, {directory: dir})
+	bower.commands.install([], {}, opts)
 		.on('log', function(result) {
 			gutil.log(['bower', gutil.colors.cyan(result.id), result.message].join(' '));
 		})
