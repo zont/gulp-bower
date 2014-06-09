@@ -18,7 +18,7 @@ module.exports = function (opts) {
 		};
 	}
 
-	opts || (opts = {});
+	opts  = opts || {};
 
 	if (!opts.directory) {
 		var bowerrc = (opts.cwd || '.') + '/.bowerrc';
@@ -26,7 +26,7 @@ module.exports = function (opts) {
 			var bower_config = JSON.parse(fs.readFileSync(bowerrc));
 			opts.directory = bower_config.directory;
 		}
-		opts.directory || (opts.directory = './bower_components');
+		opts.directory = opts.directory || './bower_components';
 	}
 
 	var dir = opts.directory;
