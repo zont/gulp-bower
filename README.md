@@ -14,6 +14,7 @@ npm install --save-dev gulp-bower
 Then, add it to your `gulpfile.js`:
 
 ```javascript
+var gulp = require('gulp');
 var bower = require('gulp-bower');
 
 gulp.task('bower', function() {
@@ -27,6 +28,7 @@ This defaults to the directory configured in `./.bowerrc` or to `./bower_compone
 You can also specify a custom Bower directory:
 
 ```javascript
+var gulp = require('gulp');
 var bower = require('gulp-bower');
 
 gulp.task('bower', function() {
@@ -38,6 +40,7 @@ gulp.task('bower', function() {
 To set the current working directory, you must pass in an `options` object:
 
 ```javascript
+var gulp = require('gulp');
 var bower = require('gulp-bower');
 
 gulp.task('bower', function() {
