@@ -5,14 +5,16 @@ var path = require('path');
 var through = require('through2');
 var walk = require('walk');
 
-module.exports = function (opts) {
+var toString = {}.toString;
+
+module.exports = function (opts, cmdArguments) {
 
 	var stream = through.obj(function(file, enc, callback) {
 		this.push(file);
 		callback();
 	});
 
-	if (typeof opts === 'string') {
+	if (toString.call(opts) === '[object String]') {
 		opts = {
 			directory: opts
 		};
@@ -33,7 +35,22 @@ module.exports = function (opts) {
 	gutil.log("Using cwd: ", opts.cwd || process.cwd());
 	gutil.log("Using bower dir: ", dir);
 
-	bower.commands.install([], {}, opts)
+  var cmd = opts.cmd;
+  if (!cmd) {
+    cmd = 'install';
+  }
+  delete(opts.cmd);
+
+  if (toString.call(cmdArguments) !== '[object Array]') {
+    cmdArguments = [];
+  }
+  if (toString.call(cmdArguments[0]) !== '[object Array]') {
+    cmdArguments[0] = [];
+  }
+  cmdArguments[1] = cmdArguments[1] || {};
+  cmdArguments[2] = opts;
+
+	bower.commands[cmd].apply(bower.commands, cmdArguments)
 		.on('log', function(result) {
 			gutil.log(['bower', gutil.colors.cyan(result.id), result.message].join(' '));
 		})
