@@ -49,6 +49,19 @@ gulp.task('bower', function() {
 });
 ```
 
+By default `gulp-bower` runs `install` command for Bower.
+Using `cmd` property, you can specify the custom command. (e.g. `update`)
+
+```javascript
+var bower = require('gulp-bower');
+
+gulp.task('bower', function() {
+  return bower({ cmd: 'update'});
+});
+```
+
+
+
 ## Changelog
 
 #####0.0.6
