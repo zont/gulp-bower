@@ -64,6 +64,9 @@ gulp.task('bower', function() {
 
 ## Changelog
 
+#####0.0.7
+- Added commands support (by Keksinautin)
+
 #####0.0.6
 - Added ability to pass in an initialization object that allows a cwd to be specified (by cb1kenobi)
 
