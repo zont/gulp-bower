@@ -59,7 +59,8 @@ module.exports = function (opts, cmdArguments) {
 			stream.end();
 		})
 		.on('end', function() {
-			var walker = walk.walk(dir);
+			var baseDir = path.join(opts.cwd, dir);
+			var walker = walk.walk(baseDir);
 			walker.on("errors", function(root, stats, next) {
 				stream.emit('error', new gutil.PluginError('gulp-bower', stats.error));
 				next();
@@ -75,7 +76,7 @@ module.exports = function (opts, cmdArguments) {
 						stream.emit('error', new gutil.PluginError('gulp-bower', error));
 					else
 						stream.write(new gutil.File({
-							path: path.relative(dir, filePath),
+							path: path.relative(baseDir, filePath),
 							contents: data
 						}));
 
