@@ -1,6 +1,6 @@
 {
-	"name": "gulp-bower",
-	"version": "0.0.7",
+	"name": "gulp-bower2",
+	"version": "0.0.8",
 	"description": "Install Bower packages.",
 	"main": "index.js",
 	"dependencies": {
@@ -18,7 +18,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git://github.com/zont/gulp-bower.git"
+		"url": "https://github.com/FronterAS/gulp-bower"
 	},
 	"keywords": [
 		"gulpplugin",
@@ -27,7 +27,7 @@
 	"author": "Alexander Zonov <zont@pochta.ru>",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/zont/gulp-bower/issues"
+		"url": "https://github.com/FronterAS/gulp-bower/issues"
 	},
 	"engines": {
 		"node": ">=0.8"
