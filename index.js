@@ -29,7 +29,7 @@ module.exports = function (opts, cmdArguments) {
 			var bower_config = JSON.parse(fs.readFileSync(bowerrc));
 			opts.directory = bower_config.directory;
 		}
-		opts.directory = opts.directory || path.join(opts.cwd, 'bower_components');
+		opts.directory = opts.directory || './bower_components';
 	}
 
 	var dir = opts.directory;
