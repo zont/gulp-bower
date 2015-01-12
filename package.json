@@ -1,6 +1,6 @@
 {
 	"name": "gulp-bower",
-	"version": "0.0.7",
+	"version": "0.0.8",
 	"description": "Install Bower packages.",
 	"main": "index.js",
 	"dependencies": {
