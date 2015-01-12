@@ -64,6 +64,9 @@ gulp.task('bower', function() {
 
 ## Changelog
 
+#####0.0.10
+- Fixed #28
+
 #####0.0.9
 - Fixed #19
 - Fixed undefined cwd bug
