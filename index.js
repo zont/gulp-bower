@@ -20,35 +20,33 @@ module.exports = function (opts, cmdArguments) {
 		};
 	}
 
-	opts  = opts || {};
+	opts = opts || {};
+	opts.cwd = opts.cwd || process.cwd();
 
 	if (!opts.directory) {
-		var bowerrc = (opts.cwd || '.') + '/.bowerrc';
+		var bowerrc = path.join(opts.cwd, '.bowerrc');
 		if (fs.existsSync(bowerrc)) {
 			var bower_config = JSON.parse(fs.readFileSync(bowerrc));
 			opts.directory = bower_config.directory;
 		}
-		opts.directory = opts.directory || './bower_components';
+		opts.directory = opts.directory || path.join(opts.cwd, 'bower_components');
 	}
 
 	var dir = opts.directory;
-	gutil.log("Using cwd: ", opts.cwd || process.cwd());
+	gutil.log("Using cwd: ", opts.cwd);
 	gutil.log("Using bower dir: ", dir);
 
-  var cmd = opts.cmd;
-  if (!cmd) {
-    cmd = 'install';
-  }
-  delete(opts.cmd);
+	var cmd = opts.cmd || 'install';
+	delete(opts.cmd);
 
-  if (toString.call(cmdArguments) !== '[object Array]') {
-    cmdArguments = [];
-  }
-  if (toString.call(cmdArguments[0]) !== '[object Array]') {
-    cmdArguments[0] = [];
-  }
-  cmdArguments[1] = cmdArguments[1] || {};
-  cmdArguments[2] = opts;
+	if (toString.call(cmdArguments) !== '[object Array]') {
+		cmdArguments = [];
+	}
+	if (toString.call(cmdArguments[0]) !== '[object Array]') {
+		cmdArguments[0] = [];
+	}
+	cmdArguments[1] = cmdArguments[1] || {};
+	cmdArguments[2] = opts;
 
 	bower.commands[cmd].apply(bower.commands, cmdArguments)
 		.on('log', function(result) {
