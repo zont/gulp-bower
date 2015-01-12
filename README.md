@@ -64,6 +64,10 @@ gulp.task('bower', function() {
 
 ## Changelog
 
+#####0.0.9
+- Fixed #19
+- Fixed undefined cwd bug
+
 #####0.0.8
 - Fixed dependencies versions (by Karl-Gustav)
 - Fixed cwd bug (by mlegenhausen)
