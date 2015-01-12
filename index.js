@@ -83,7 +83,6 @@ module.exports = function (opts, cmdArguments) {
 			});
 			walker.on("end", function() {
 				stream.end();
-				stream.emit("end");
 			});
 		});
 
