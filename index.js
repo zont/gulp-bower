@@ -48,7 +48,37 @@ module.exports = function (opts, cmdArguments) {
 	cmdArguments[1] = cmdArguments[1] || {};
 	cmdArguments[2] = opts;
 
-	bower.commands[cmd].apply(bower.commands, cmdArguments)
+
+	// bower has some commands that are provided in a nested object structure, e.g. `bower cache clean`.
+	var bowerCommand;
+
+	// clean up the command given, to avoid unnecessary errors
+	cmd = cmd.trim();
+
+	var nestedCommand = cmd.split(' ');
+
+	if (nestedCommand.length > 1) {
+		// To enable that kind of nested commands, we try to resolve those commands, before passing them to bower.
+		for (var commandPos = 0; commandPos < nestedCommand.length; commandPos++) {
+			if (bowerCommand) {
+				// when the root command is already there, walk into the depth.
+				bowerCommand = bowerCommand[nestedCommand[commandPos]];
+			} else {
+				// the first time we look for the "root" commands available in bower
+				bowerCommand = bower.commands[nestedCommand[commandPos]];
+			}
+		}
+
+		// try to give a good error description to the user when a bad command was passed
+		if (bowerCommand === undefined) {
+			throw("The command " + cmd + " is not available in the bower commands");
+		}
+	} else {
+		// if the command isn't nested, just go ahead as usual
+		bowerCommand = bower.commands[cmd];
+	}
+
+	bowerCommand.apply(bower.commands, cmdArguments)
 		.on('log', function(result) {
 			gutil.log(['bower', gutil.colors.cyan(result.id), result.message].join(' '));
 		})
