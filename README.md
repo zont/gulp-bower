@@ -64,6 +64,9 @@ gulp.task('bower', function() {
 
 ## Changelog
 
+#####0.0.11
+- Fixed dependencies (by serbrech)
+
 #####0.0.10
 - Fixed #28
 
