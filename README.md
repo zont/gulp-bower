@@ -63,6 +63,9 @@ gulp.task('bower', function() {
 
 ## Changelog
 
+#####0.0.12
+- Fixed command passing to also handle nested commands (by mechanoid)
+
 #####0.0.11
 - Fixed dependencies (by serbrech)
 
