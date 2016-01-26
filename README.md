@@ -78,6 +78,9 @@ gulp.task('bower', function() {
 
 ## Changelog
 
+#####0.0.13
+- Added verbosity options, prompting, .bowerrc handling, tests and CI. (by Crevil)
+
 #####0.0.12
 - Fixed command passing to also handle nested commands (by mechanoid)
 
