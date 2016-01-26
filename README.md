@@ -1,6 +1,8 @@
 # gulp-bower
 > Install Bower packages.
 
+[![Build Status](https://travis-ci.org/Crevil/gulp-bower.svg?branch=master)](https://travis-ci.org/Crevil/gulp-bower) [![codecov.io](https://codecov.io/github/Crevil/gulp-bower/coverage.svg?branch=master)](https://codecov.io/github/Crevil/gulp-bower?branch=master)
+
 This task is designed for gulp 3.
 
 ## Usage
@@ -52,6 +54,7 @@ By default `gulp-bower` runs `install` command for Bower.
 Using `cmd` property, you can specify the custom command. (e.g. `update`)
 
 ```javascript
+var gulp = require('gulp');
 var bower = require('gulp-bower');
 
 gulp.task('bower', function() {
@@ -59,7 +62,19 @@ gulp.task('bower', function() {
 });
 ```
 
+## API
+### `bower(directory)`
+* **directory** - `string` Install directory, see **opts.directory** below.
 
+### `bower(opts)`
+* **opts.cmd** - `string` bower command. Default: `install` 
+* **opts.cwd** - `string` Current working directory. Default: `process.cwd()`
+* **opts.directory** - `string` Install directory. Default: From `.bowerrc` or `bower_components`
+* **opts.interactive** - `boolean` Enable prompting on version conflicts. Default: `false`
+* **opts.verbosity** - `number` Set verbosity level. Default: `2`
+  * **0** - No output
+  * **1** - Error output
+  * **2** - Info
 
 ## Changelog
 
