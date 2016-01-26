@@ -1,7 +1,7 @@
 # gulp-bower
 > Install Bower packages.
 
-[![Build Status](https://travis-ci.org/Crevil/gulp-bower.svg?branch=master)](https://travis-ci.org/Crevil/gulp-bower) [![codecov.io](https://codecov.io/github/Crevil/gulp-bower/coverage.svg?branch=master)](https://codecov.io/github/Crevil/gulp-bower?branch=master)
+[![Build Status](https://travis-ci.org/zont/gulp-bower.svg?branch=master)](https://travis-ci.org/zont/gulp-bower) [![codecov.io](https://codecov.io/github/zont/gulp-bower/coverage.svg?branch=master)](https://codecov.io/github/zont/gulp-bower?branch=master)
 
 This task is designed for gulp 3.
 
