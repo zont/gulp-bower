@@ -155,9 +155,10 @@ function createCmdArguments(cmdArguments, opts) {
         cmdArguments = [];
     }
     if (toString.call(cmdArguments[0]) !== '[object Array]') {
-        cmdArguments[0] = [];
+        cmdArguments[0] = (opts.packages instanceof Array && opts.packages.length > 0) ? opts.packages : [];
     }
     cmdArguments[1] = cmdArguments[1] || {};
+    cmdArguments[1].save = opts.save || false;
     cmdArguments[2] = opts;
 
     return cmdArguments;
@@ -204,7 +205,7 @@ function getBowerCommand(cmd) {
 
 /**
  * Write stream to filesystem
- * 
+ *
  * @param {object} opts options object
  * @param {object} stream file stream
  */

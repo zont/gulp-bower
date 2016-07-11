@@ -24,7 +24,18 @@ gulp.task('bower', function() {
 });
 ```
 
-### Examples
+You can also provide array of Bower packages in `packages` option and save them into `bower.json`:
+
+```javascript
+var gulp = require('gulp');
+var bower = require('gulp-bower');
+
+gulp.task('bower', function() {
+  return bower({ packages: ['jquery', 'lodash'], save: true });
+});
+```
+
+### Examples of options
 
 * To install packages into a custom directory, pass the `directory` option:
 
@@ -62,9 +73,11 @@ gulp.task('bower', function() {
 ## API
 
 ### `bower(opts)`
+* **opts.packages** - `array` Array of Bower packages. Default: `[]`
+* **opts.save** - `boolean` Save packages as dependencies into bower.json. Default: `false`
 * **opts.directory** - `string` Install directory. Default: taken from `.bowerrc` config or `bower_components`
 * **opts.cwd** - `string` Current working directory. Default: `process.cwd()`
-* **opts.cmd** - `string` bower command. Default: `install`
+* **opts.cmd** - `string` Bower command. Default: `install`
 * **opts.interactive** - `boolean` Enable prompting on version conflicts. Default: `false`
 * **opts.verbosity** - `number` Set verbosity level. Default: `2`
   * **0** - No output
