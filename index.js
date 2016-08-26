@@ -66,7 +66,11 @@ function gulpBower(opts, cmdArguments) {
 
     bowerCommand.apply(bower.commands, cmdArguments)
         .on('log', function (result) {
-            log.info(['bower', gutil.colors.cyan(result.id), result.message].join(' '));
+            if (result.id === 'incompatible') {
+              incompatibleLog(result.data);
+            } else {
+              log.info(['bower', gutil.colors.cyan(result.id), result.message].join(' '));
+            }
         })
         .on('prompt', function (prompts, callback) {
             if (enablePrompt === true) {
@@ -240,6 +244,62 @@ function writeStreamToFs(opts, stream) {
     walker.on('end', function () {
         stream.emit('end');
     });
+}
+
+
+function incompatibleLog(logdata) {
+    var str;
+
+    // Generate dependants string for each pick
+    logdata.picks.forEach(function (pick) {
+        pick.dependants = pick.dependants.map(function (dependant) {
+            console.log(dependant);
+            var release = dependant.pkgMeta._release;
+            return dependant.endpoint.name + (release ? '#' + release : '');
+        }).join(', ');
+    });
+
+    if (logdata.suitable) {
+
+      str += gutil.colors.yellow('\nPlease not that,\n');
+      logdata.picks.forEach(function (pick, index) {
+          if (pick.dependants) {
+            gutil.colors.green(pick.dependants);
+          } else {
+            str += 'none';
+          }
+          str += ' depends on ';
+          str += gutil.colors.cyan(pick.endpoint.name + pick.endpoint.target);
+          if (pick.pkgMeta._release) {
+            str += gutil.colors.green(' which resolved to ' + pick.pkgMeta._release);
+          }
+          str += '\n\nResort to using ';
+          str += gutil.colors.cyan(pick.endpoint.name + pick.endpoint.target);
+          str += ' which resolved to ';
+          str += gutil.colors.green(pick.suitable.endpoint.name + pick.suitable.pkgMeta._release);
+          str += '\nCode incompatibilities may occur.\n';
+      });
+
+    } else {
+
+      str += gutil.colors.yellow('\nUnable to find a suitable version for ' + logdata.name);
+      str += gutil.colors.yellow(', please choose one by typing one of the numbers below\n');
+      logdata.picks.forEach(function (pick, index) {
+        str += gutil.colors.magenta(index + 1) + ' ';
+        str += gutil.colors.cyan(pick.endpoint.name + pick.endpoint.target);
+        if (pick.pkgMeta._release) {
+          str += gutil.colors.green(' which resolved to ' + pick.pkgMeta._release);
+        }
+        if (pick.dependants) {
+          str += ' and is required by ' + gutil.colors.green(pick.dependants);
+        }
+        str += '\n';
+      });
+      str += '\n\nPrefix the choice with ! to persist it to bower.json\n';
+
+    }
+
+    log.output(str);
 }
 
 module.exports = gulpBower;
