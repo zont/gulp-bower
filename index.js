@@ -67,7 +67,7 @@ function gulpBower(opts, cmdArguments) {
     bowerCommand.apply(bower.commands, cmdArguments)
         .on('log', function (result) {
             if (result.id === 'incompatible') {
-              incompatibleLog(result.data);
+              if (this.verbosity > 1) incompatibleLog(result.data);
             } else {
               log.info(['bower', gutil.colors.cyan(result.id), result.message].join(' '));
             }
