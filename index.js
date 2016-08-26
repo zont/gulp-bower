@@ -253,7 +253,6 @@ function incompatibleLog(logdata) {
     // Generate dependants string for each pick
     logdata.picks.forEach(function (pick) {
         pick.dependants = pick.dependants.map(function (dependant) {
-            console.log(dependant);
             var release = dependant.pkgMeta._release;
             return dependant.endpoint.name + (release ? '#' + release : '');
         }).join(', ');
