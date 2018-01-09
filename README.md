@@ -1,5 +1,5 @@
 # gulp-bower
-> Use Bower packages within gulp task manager.
+> Deprecated. Please use [Browserify](https://www.npmjs.com/package/browserify), [Rollup](https://www.npmjs.com/package/rollup) or [Webpack](https://www.npmjs.com/package/webpack)
 
 [![Build Status](https://travis-ci.org/zont/gulp-bower.svg?branch=master)](https://travis-ci.org/zont/gulp-bower) [![codecov.io](https://codecov.io/github/zont/gulp-bower/coverage.svg?branch=master)](https://codecov.io/github/zont/gulp-bower?branch=master)
 
@@ -72,6 +72,9 @@ gulp.task('bower', function() {
   * **2** - Info
 
 ## Changelog
+
+#####0.0.14
+- Drop dependency on deprecated `gulp-util`. (by TheDancingCode)
 
 #####0.0.13
 - Added verbosity options, prompting, .bowerrc handling, tests and CI. (by Crevil)
