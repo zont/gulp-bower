@@ -242,6 +242,7 @@ function writeStreamToFs(opts, stream) {
 
     walker.on('end', function () {
         stream.emit('end');
+        stream.emit('finish');
     });
 }
 
